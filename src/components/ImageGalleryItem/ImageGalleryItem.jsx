@@ -15,7 +15,7 @@ export class ImageGalleryItem extends Component {
     }
 
     render(){
-        const {src, alt, id, scrollMarker} = this.props;
+        const {src, alt, id} = this.props;
         return (
             <li className={css.galleryItem} onClick={this.props.onGalleryItemClick}>
                 
