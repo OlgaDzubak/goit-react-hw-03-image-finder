@@ -30,8 +30,7 @@ export class ImageGallery extends Component {
         onGalleryClick: PropTypes.func,
     }
 
-    state={ ...INITIAL_STATE }
-
+   state={ ...INITIAL_STATE }
 
 
     componentDidUpdate(prevProps, prevState){
@@ -60,8 +59,6 @@ export class ImageGallery extends Component {
                 {   gallery: [...prevState.gallery, ...hits], 
                     isButtonShown: (page < Math.ceil(totalHits /per_page)),
             }));
-            
-
         }catch(error){
             if (error.code !== 'ERR_CANCELED'){
                 this.setState({error: "Oops! Something went wrong! Try reloading the page!"});
@@ -69,9 +66,7 @@ export class ImageGallery extends Component {
         }finally{this.setState({isLoading: false});}
     }
 
-    onClickButton = () => {
-        this.setState(prevState=>({page: prevState.page + 1,}));
-    }
+    onClickButton = () => { this.setState(prevState=>({page: prevState.page + 1,}))};
 
     onGalleryClick = (event) => {
         const {gallery} = this.state;
@@ -82,34 +77,21 @@ export class ImageGallery extends Component {
     render(){
         const {gallery, isEmpty, isLoading, error, isButtonShown} = this.state;
         const {filter} = this.props
+      
         return (
-
             <main className={css.main}>
-                {
-                    
-                    !isEmpty
+                {  !isEmpty
                         ? <ul className={css.gallery}>
-                            {
-                                gallery.map((item) => { 
+                            {   gallery.map((item) => { 
                                     return <ImageGalleryItem onGalleryItemClick={this.onGalleryClick} src={item.webformatURL} alt={item.tags} id={item.id} key={nanoid()}></ImageGalleryItem>;
-                                })                                
-                            }
-                            
+                                })}
                           </ul> 
-                        
-                                                 
                         : <p className={css.p_isEmpty}>Sorry. There are no images for filter "{filter}"</p>
-                        
-                        
                 }
-
                 {  isLoading && <Loader className={css.loader}></Loader> }
-
                 {  error && <p className={css.p_isError}>Error: "{error}"</p> }
-                
                 { isButtonShown && <Button title='Load more' onClick={this.onClickButton}></Button>}
             </main>
-
         );
     };
 }
