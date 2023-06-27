@@ -71,7 +71,7 @@ export class ImageGallery extends Component {
     onGalleryClick = (event) => {
         const {gallery} = this.state;
         const imageIndex= gallery.findIndex(item => item.id.toString() === event.target.id);
-        this.props.onGalleryClick({src: gallery[imageIndex].largeImageURL,  alt: gallery[imageIndex].alt,});
+        this.props.onGalleryClick({src: gallery[imageIndex].largeImageURL,  alt: gallery[imageIndex].tags,});
     }
     
     render(){
